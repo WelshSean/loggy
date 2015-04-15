@@ -1,0 +1,13 @@
+{"Linux":[
+	"Linux syslog test message one",
+	"Linux syslog test message two"
+	],
+"AIX":[
+	"AIX syslog test message one",
+	"AIX syslog test message two"
+	],
+"Solaris":[
+	"Solaris syslog test message one",
+	"Solaris syslog test message two"
+	]
+}
