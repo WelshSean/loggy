@@ -3,16 +3,18 @@
 import json,sys
 from pprint import pprint
 
-def pickMessageByIndex(data, OS, Index):
-    return data[OS][Index]
+def pickMessageByIndex(data, OS, Indices):
+    ans = list()
+    if type(Indices) is not list:
+        Indices = [ Indices ]
+    for Index in Indices:
+        ans.append(data[OS][Index])
+    return ans
 
 def pickRandomByOS(data, OS, test = False):
     from random import randint
     ri = randint(0, getEntriesPerOS(data, OS) -1)  ### Remember array indices start from 0
     k = data[OS].keys()
-    print "k", k
-    print "ri", ri
-    print "OS", OS
     return data[OS][k[ri]]
 
 def getEntriesPerOS(data,OS):
