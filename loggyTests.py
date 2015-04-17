@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest,json
-from loggy import pickMessageByIndex, getEntriesPerOS
+from loggy import pickMessageByIndex, getEntriesPerOS, getNumberOS
 
 class LoggyTests(unittest.TestCase):
 
@@ -25,6 +25,13 @@ class LoggyTests(unittest.TestCase):
             data = json.load(data_file)
         output = getEntriesPerOS(data, "Linux")
         self.assertEqual(output, 2)
+
+
+    def testGetNumberOS(self):
+        with open('loggy.data') as data_file:
+            data = json.load(data_file)
+        output = getNumberOS(data)
+        self.assertEqual(output, 3)
 
 
 def main():
