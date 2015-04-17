@@ -8,6 +8,8 @@
 	},
 "Solaris":{
 	"Sol1":"Solaris syslog test message one",
-	"Sol2":"Solaris syslog test message two"
+	"Sol2":"Solaris syslog test message two",
+	"Sol3":"Solaris syslog test message three",
+	"Sol4":"Solaris syslog test message four"
 	}
 }
