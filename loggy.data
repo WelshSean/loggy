@@ -1,13 +1,13 @@
-{"Linux":[
-	"Linux syslog test message one",
-	"Linux syslog test message two"
-	],
-"AIX":[
-	"AIX syslog test message one",
-	"AIX syslog test message two"
-	],
-"Solaris":[
-	"Solaris syslog test message one",
-	"Solaris syslog test message two"
-	]
+{"Linux":{
+	"Lin1":"Linux syslog test message one",
+	"Lin2":"Linux syslog test message two"
+	},
+"AIX":{
+	"AIX1":"AIX syslog test message one",
+	"AIX2":"AIX syslog test message two"
+	},
+"Solaris":{
+	"Sol1":"Solaris syslog test message one",
+	"Sol2":"Solaris syslog test message two"
+	}
 }

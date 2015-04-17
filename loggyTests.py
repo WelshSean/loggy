@@ -1,14 +1,14 @@
 #!/usr/bin/python
 
 import unittest,json
-from loggy import pickMessage
+from loggy import pickMessageByIndex
 
-class FooTests(unittest.TestCase):
+class LoggyTests(unittest.TestCase):
 
-    def testPickOne(self):
+    def testPickMessageByIndex(self):
         with open('loggy.data') as data_file:
             data = json.load(data_file)
-        output = pickMessage(data, "Linux", "Lin1")
+        output = pickMessageByIndex(data, "Linux", "Lin1")
         self.assertEqual(output, "Linux syslog test message one")
 
 def main():
