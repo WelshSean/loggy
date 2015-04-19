@@ -3,10 +3,10 @@
 import json,sys, time
 from pprint import pprint
 
-def writeLogMessage(data, index, OS="Linux", hostName="testhost", logFile="/var/tmp/teslog"):
+def writeLogMessage(data, index, OS="Linux", hostName="testhost", logFile="/var/tmp/teslog", procString="procname[9999]"):
     messages = pickMessageByIndex(data, OS, index)
     for message in messages: 
-       writeSyslog(message, hostName, logFile)
+       writeSyslog(message, hostName, logFile, procString=procString)
 
 def writeSyslog(message, host, filename, procString="procname[9999]"):
     try:

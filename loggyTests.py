@@ -67,6 +67,18 @@ class LoggyTests(unittest.TestCase):
         self.assertTrue(expectedContents in output)       
            
 
+    def testWriteLogMessageProc(self):
+        expectedContents = "Linux syslog test message one"
+        expectedProc = "sshd[345]"
+        with open('loggy.data') as data_file:
+            data = json.load(data_file)
+        fName = "/tmp/testfile"
+        if os.path.isfile(fName):
+           os.remove(fName)
+        writeLogMessage(data, "Lin1", "Linux", logFile=fName, procString=expectedProc)
+        fH = open(fName)
+        output = fH.readline()
+        self.assertTrue(expectedContents in output and expectedProc in output)       
 
 def main():
     unittest.main()
