@@ -1,7 +1,20 @@
 #!/usr/bin/python
 
-import json,sys
+import json,sys, time
 from pprint import pprint
+
+#def writeLogMessage(data, index, OS="Linux", hostName="testhost", logFile="/var/tmp/teslog"):
+#    message = pickMessageByIndex(data, OS, index)
+
+def writeSyslog(message, host, filename, procString="procname[9999]"):
+    try:
+        fh = open(filename, "w+")
+    except:
+        print "Cant Open File"
+    else:
+        try:
+            fh.write(time.strftime("%b %d  %H:%M:%S") + " " + host + procString + message)
+        finally: fh.close()
 
 def pickMessageByIndex(data, OS, Indices):
     ans = list()
@@ -45,6 +58,8 @@ def main():
         print pickRandomByOS(data, sys.argv[2])
     elif sys.argv[1] == "pickRan":
         print pickRandom(data)
+    elif sys.argv[1] == "wlm":
+        writeLogMessage(data, sys.argv[2])
 
 
 if __name__ == '__main__':

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
-import unittest,json
-from loggy import pickMessageByIndex, getEntriesPerOS, getNumberOS
+import unittest,json, os
+from loggy import pickMessageByIndex, getEntriesPerOS, getNumberOS, writeSyslog
 
 class LoggyTests(unittest.TestCase):
 
@@ -32,6 +32,28 @@ class LoggyTests(unittest.TestCase):
             data = json.load(data_file)
         output = getNumberOS(data)
         self.assertEqual(output, 3)
+
+    def testWriteSyslog(self):
+        fName = "/tmp/testfile"
+        expectedContents = "ZZZZZ"
+        if os.path.isfile(fName):
+           os.remove(fName)
+        writeSyslog(expectedContents, "Blaina", fName)
+        fH = open(fName)
+        output = fH.readline()
+        self.assertTrue(expectedContents in output)       
+	
+    def testWriteSyslogproc(self):
+        fName = "/tmp/testfile"
+        expectedContents = "ZZZZZ"
+        expectedProc = "sshd[345]"
+        if os.path.isfile(fName):
+           os.remove(fName)
+        writeSyslog(expectedContents, "Blaina", fName, procString=expectedProc)
+        fH = open(fName)
+        output = fH.readline()
+        self.assertTrue(expectedContents in output and expectedProc in output)       
+           
 
 
 def main():
