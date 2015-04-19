@@ -3,17 +3,19 @@
 import json,sys, time
 from pprint import pprint
 
-#def writeLogMessage(data, index, OS="Linux", hostName="testhost", logFile="/var/tmp/teslog"):
-#    message = pickMessageByIndex(data, OS, index)
+def writeLogMessage(data, index, OS="Linux", hostName="testhost", logFile="/var/tmp/teslog"):
+    messages = pickMessageByIndex(data, OS, index)
+    for message in messages: 
+       writeSyslog(message, hostName, logFile)
 
 def writeSyslog(message, host, filename, procString="procname[9999]"):
     try:
-        fh = open(filename, "w+")
+        fh = open(filename, "a")
     except:
         print "Cant Open File"
     else:
         try:
-            fh.write(time.strftime("%b %d  %H:%M:%S") + " " + host + procString + message)
+            fh.write(time.strftime("%b %d  %H:%M:%S") + " " + host + " " + procString +" " + message +"\n")
         finally: fh.close()
 
 def pickMessageByIndex(data, OS, Indices):

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest,json, os
-from loggy import pickMessageByIndex, getEntriesPerOS, getNumberOS, writeSyslog
+from loggy import pickMessageByIndex, getEntriesPerOS, getNumberOS, writeSyslog, writeLogMessage
 
 class LoggyTests(unittest.TestCase):
 
@@ -53,6 +53,18 @@ class LoggyTests(unittest.TestCase):
         fH = open(fName)
         output = fH.readline()
         self.assertTrue(expectedContents in output and expectedProc in output)       
+
+    def testWriteLogMessage(self):
+        expectedContents = "Linux syslog test message one"
+        with open('loggy.data') as data_file:
+            data = json.load(data_file)
+        fName = "/tmp/testfile"
+        if os.path.isfile(fName):
+           os.remove(fName)
+        writeLogMessage(data, "Lin1", "Linux", logFile=fName)
+        fH = open(fName)
+        output = fH.readline()
+        self.assertTrue(expectedContents in output)       
            
 
 
