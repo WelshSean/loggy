@@ -1,15 +1,15 @@
 {"Linux":{
-	"Lin1":"Linux syslog test message one",
-	"Lin2":"Linux syslog test message two"
+	"Lin1":{"proc":"lp1", "message":"Linux syslog test message one"},
+	"Lin2":{"proc":"lp2", "message":"Linux syslog test message two"}
 	},
 "AIX":{
-	"AIX1":"AIX syslog test message one",
-	"AIX2":"AIX syslog test message two"
+	"AIX1":{"proc":"ap1", "message":"AIX syslog test message one"},
+	"AIX2":{"proc":"ap2", "message":"AIX syslog test message two"}
 	},
 "Solaris":{
-	"Sol1":"Solaris syslog test message one",
-	"Sol2":"Solaris syslog test message two",
-	"Sol3":"Solaris syslog test message three",
-	"Sol4":"Solaris syslog test message four"
+	"Sol1":{"proc":"sp1", "message":"Solaris syslog test message one"},
+	"Sol2":{"proc":"sp2", "message":"Solaris syslog test message two"},
+	"Sol3":{"proc":"sp3", "message":"Solaris syslog test message three"},
+	"Sol4":{"proc":"sp4", "message":"Solaris syslog test message four"}
 	}
 }

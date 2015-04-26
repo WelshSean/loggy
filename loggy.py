@@ -3,12 +3,12 @@
 import json,sys, time
 from pprint import pprint
 
-def writeLogMessage(data, index, OS="Linux", hostName="testhost", logFile="/var/tmp/teslog", procString="procname[9999]"):
-    messages = pickMessageByIndex(data, OS, index)
-    for message in messages: 
-       writeSyslog(message, hostName, logFile, procString=procString)
+def writeLogMessage(data, index, OS="Linux", hostName="testhost", logFile="/var/tmp/teslog", pid="9999"):
+    info = pickMessageByIndex(data, OS, index)
+    procString=info["proc"]+"["+pid+"]"
+    writeSyslog(info["message"], hostName, logFile, procString)
 
-def writeSyslog(message, host, filename, procString="procname[9999]"):
+def writeSyslog(message, host, filename, procString):
     try:
         fh = open(filename, "a")
     except:
@@ -18,19 +18,14 @@ def writeSyslog(message, host, filename, procString="procname[9999]"):
             fh.write(time.strftime("%b %d  %H:%M:%S") + " " + host + " " + procString +" " + message +"\n")
         finally: fh.close()
 
-def pickMessageByIndex(data, OS, Indices):
-    ans = list()
-    if type(Indices) is not list:
-        Indices = [ Indices ]
-    for Index in Indices:
-        ans.append(data[OS][Index])
-    return ans
+def pickMessageByIndex(data, OS, Index):
+    return data[OS][Index]
 
 def pickRandomByOS(data, OS, test = False):   ### No test yet
     from random import randint
     ri = randint(0, getEntriesPerOS(data, OS) - 1)  ### Remember array indices start from 0
     k = data[OS].keys()
-    return data[OS][k[ri]]
+    return pickMessageByIndex(data, OS, k[ri]) 
 
 def pickRandom(data, test = False):   ### No test yet
     from random import randint
