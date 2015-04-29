@@ -78,7 +78,6 @@ class LoggyTests(unittest.TestCase):
         self.assertTrue(expectedContents in output)
 
 
-
 def main():
     unittest.main()
 
