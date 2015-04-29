@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import unittest,json, os
-from loggy import pickMessageByIndex, getEntriesPerOS, getNumberOS, writeSyslog, writeLogMessage
+from loggy import pickMessageByIndex, getEntriesPerOS, getNumberOS, writeSyslog, writeLogMessage, sequenceRun
 
 class LoggyTests(unittest.TestCase):
 
@@ -64,6 +64,20 @@ class LoggyTests(unittest.TestCase):
         fH = open(fName)
         output = fH.readline()
         self.assertTrue(expectedContents in output and expectedPID in output)       
+
+    def testSequenceRunOneLine(self):
+        expectedContents = "devhost1 lp1[555] Linux syslog test message one"
+        with open('loggy.data') as data_file:
+            data = json.load(data_file)
+        fName = "/tmp/testfile"
+        if os.path.isfile(fName):
+           os.remove(fName)
+        sequenceRun(data, "test.lsq", outFile=fName)
+        fH = open(fName)
+        output = fH.readline()
+        self.assertTrue(expectedContents in output)
+
+
 
 def main():
     unittest.main()

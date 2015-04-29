@@ -3,6 +3,15 @@
 import json,sys, time
 from pprint import pprint
 
+#OS:index:PID:hostname
+def sequenceRun(data, seqFile, outFile):
+    lines = [line.strip() for line in open(seqFile)]
+    for line in lines:
+        if line.startswith('#'):
+            continue
+        args = line.split(':')
+        writeLogMessage(data, args[1], OS=args[0], hostName=args[3], logFile=outFile, pid=args[2]  )       
+
 def writeLogMessage(data, index, OS="Linux", hostName="testhost", logFile="/var/tmp/teslog", pid="9999"):
     info = pickMessageByIndex(data, OS, index)
     procString=info["proc"]+"["+pid+"]"
@@ -57,6 +66,8 @@ def main():
         print pickRandom(data)
     elif sys.argv[1] == "wlm":
         writeLogMessage(data, sys.argv[2])
+    elif sys.argv[1] == "seq":
+        sequenceRun(data, "test.lsq", outFile="/tmp/sean")
 
 
 if __name__ == '__main__':
